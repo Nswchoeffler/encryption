@@ -1,23 +1,31 @@
 import random
-
-ABCD = "abcdefghijklmonpqrstuvwyxz"
-ABCD_num =[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+i = 0
+o = 0
+encrypted_list =[]
 encrypt_decrypt = input(" Type '1' to encrypt, type '2' to decrpyt")
 if encrypt_decrypt =='1':
-    prompt = input("What would you like me to encrypt or decrypt.").lower
+    prompt = input("What would you like me to encrypt.")#.lower
 
-    encryption_list = [0,1,2,3,4,5,6,7,8,9]
-
-    encryption_key = 1 #random.randint(0,9)
-    #remove when works
-    print(encryption_key)
+    encryption_key = random.randint(1,9)
 
     encryption_key_2 = random.randint(0,9)
-    #remove when works
-    print(encryption_key_2)
 
-    if encryption_key == 1:
-        for i in prompt:
-            prompt_num =ord(prompt)
-            print(prompt_num)
+    for i in range(len(prompt)):  
+        encrypted_list.append(ord(prompt[i])*encryption_key +encryption_key_2)
+        i+=1
+    print (f"{encrypted_list} \nyour keys are {encryption_key},{encryption_key_2}")
+
+if encrypt_decrypt == '2':
+    decryption_key_1 = int(input("what is your first encryption key? "))
+    decryption_key_2 = int(input("what is your second encryption key? "))
+
+    decryption_list=[]
+    decrypted_letter = []
+    decrypt_code = [int(x) for x in input("what do you want me to decrypt? please separate by commas").split(',')]
+    for o in range(len(decrypt_code)):
+        decryption_list.append((decrypt_code[o]-decryption_key_2)/decryption_key_1)
+        decrypted_letter.append(chr(int(decryption_list[o])))
+        o +=1
+    print ("your message is")
+    print(*(decrypted_letter), sep='')
             
